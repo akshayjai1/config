@@ -4,8 +4,14 @@ import CompositeControl from './components/CompositeControl';
 class Flexi extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
   onSubmit = () => {
     // Replace data with composing your form data
     const data = {};
@@ -16,7 +22,7 @@ class Flexi extends React.Component {
     const { items = []} = this.props.config
     return (
       <form>
-        {items.map(item => <CompositeControl {...item}/>)}
+        {items.map((item, i) => <CompositeControl key={i} {...item} handleChange={this.handleChange}/>)}
         <button onClick={this.onSubmit} />
       </form>
     );

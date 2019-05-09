@@ -3,11 +3,12 @@ import TextControl from './TextControl';
 import SelectControl from './SelectControls';
 
 const CompositeControl = props => {
-  const { name, label, type, children, values} = props;
+  const { name, label, type, children, values, handleChange } = props;
   let Control = null, Children = null;
   const commonProps = {
     name,
-    label
+    label,
+    handleChange
   }
   if(type === 'TextField') {
     Control = <TextControl {...commonProps} />;
@@ -16,9 +17,9 @@ const CompositeControl = props => {
   } 
   if(children !== undefined) {
     if(children.length) {
-      Children = children.map(child => <CompositeControl {...child}/>)
+      Children = children.map((child, i) => <CompositeControl {...child} key={i} handleChange={handleChange}/>)
     } else {
-      Children = <CompositeControl {...children} />
+      Children = <CompositeControl {...children}  handleChange={handleChange}/>
     }
   }
   return <React.Fragment>
