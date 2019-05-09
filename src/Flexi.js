@@ -1,5 +1,6 @@
 import React from 'react';
 import CompositeControl from './components/CompositeControl';
+import CompositeControl1 from './components/CompositeControl.1';
 
 class Flexi extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class Flexi extends React.Component {
     return (
       <form>
         {items.map((item, i) => <CompositeControl key={i} {...item} handleChange={this.handleChange}/>)}
+        {items.map((item, i) => <CompositeControl1 key={i} {...item} handleChange={this.handleChange}/>)}
         <button onClick={this.onSubmit} />
       </form>
     );

@@ -2,17 +2,21 @@ import React from 'react';
 import TextControl from './TextControl';
 import SelectControl from './SelectControls';
 
-const CompositeControl = props => {
+const CompositeControl1 = props => {
   const { name, label, type, children, values, handleChange } = props;
   let Control = null, Children = null;
   const firstRef = React.createRef();
+  const handleFirstChange = event => {
+    handleChange({
+      value: firstRef.current.value
+    })
+  }
   const commonProps = {
     name,
     label,
-    handleChange,
+    handleFirstChange,
     ref:firstRef
   }
-
   if(type === 'TextField') {
     Control = <TextControl {...commonProps}/>;
   } else if (type === 'DropDown') {
@@ -20,9 +24,9 @@ const CompositeControl = props => {
   } 
   if(children !== undefined) {
     if(children.length) {
-      Children = children.map((child, i) => <CompositeControl {...child} key={i} handleChange={handleChange}/>)
+      Children = children.map((child, i) => <CompositeControl1 {...child} key={i} handleChange={handleChange}/>)
     } else {
-      Children = <CompositeControl {...children}  handleChange={handleChange}/>
+      Children = <CompositeControl1 {...children}  handleChange={handleChange}/>
     }
   }
   return <React.Fragment>
@@ -31,4 +35,4 @@ const CompositeControl = props => {
   </React.Fragment>
 }
 
-export default CompositeControl;
+export default CompositeControl1;
