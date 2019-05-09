@@ -18,11 +18,13 @@ const CompositeControl = props => {
     if(children.length) {
       Children = children.map(child => <CompositeControl {...child}/>)
     } else {
-      Children = <CompositeControl {...child} />
+      Children = <CompositeControl {...children} />
     }
   }
-  return <>
+  return <React.Fragment>
     {Control}
     {Children}
-  </>
+  </React.Fragment>
 }
+
+export default CompositeControl;

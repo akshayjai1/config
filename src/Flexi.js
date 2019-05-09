@@ -1,4 +1,5 @@
 import React from 'react';
+import CompositeControl from './components/CompositeControl';
 
 class Flexi extends React.Component {
   constructor(props) {
@@ -12,9 +13,10 @@ class Flexi extends React.Component {
   };
 
   render() {
+    const { items = []} = this.props.config
     return (
       <form>
-        {/* Do your stuff here */}
+        {items.map(item => <CompositeControl {...item}/>)}
         <button onClick={this.onSubmit} />
       </form>
     );

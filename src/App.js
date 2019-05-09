@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Flexi from "./Flexi";
-
+import flexiConfig from './data/FlexiConfig';
 class App extends Component {
   render() {
     return (
