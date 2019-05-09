@@ -21,20 +21,21 @@ class Flexi extends React.Component {
     const data = {
       ...this.state
     };
-    this.props.onSubmit(data); // dont edit this line
+    console.log(data);
+    // this.props.onSubmit(data); // dont edit this line
   };
 
   render() {
     const { items = []} = this.props.config
     return (
-      <form>
+      <div>
         <br />
-        {items.map((item, i) => <CompositeControl key={i} {...item} handleChange={this.handleChange}/>)}
+        {/* {items.map((item, i) => <CompositeControl key={i} {...item} handleChange={this.handleChange}/>)} */}
         <hr/>
         <br/>
         {items.map((item, i) => <CompositeControl1 key={i} {...item} handleChange={this.handleChange1}/>)}
-        <button onClick={this.onSubmit} />
-      </form>
+        <button onClick={this.onSubmit} >Submit</button>
+      </div>
     );
   }
 }

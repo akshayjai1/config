@@ -10,7 +10,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to Domino</h1>
         </header>
           <Flexi
-            onSubmit={() => {}}
+            onSubmit={(data) => {console.log('submitted data',data)}}
             config={flexiConfig}
           />
       </div>

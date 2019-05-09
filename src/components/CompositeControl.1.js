@@ -19,11 +19,14 @@ const CompositeControl1 = props => {
     let newState;
     if(!state.children){
       newState = update(state,{
-        children:{$set:[childrenValue]}
+        children:{$set:{
+          ...childrenValue,  
+        }}
       })
     } else {
       newState = update(state,{
-        children:{$push:[childrenValue]}
+        children:{$merge:{
+          ...childrenValue}}
       })
 
     }
@@ -41,7 +44,7 @@ const CompositeControl1 = props => {
     handleChange(newState);
   }
   const handleFirstChange = event => {
-    debugger;
+    // debugger;
     const newState = update(state,{
       [name+"-1"]:{
         $set:event.target.value

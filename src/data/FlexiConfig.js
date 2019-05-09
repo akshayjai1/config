@@ -20,7 +20,7 @@ const flexiConfig = {
                 "Tamil Nadu"
       ],
       "children":{
-        "name": "states",
+        "name": "states_2",
         "label": "Person's state",
         "type": "DropDown",
         "values": [
@@ -31,7 +31,7 @@ const flexiConfig = {
       }
     },
     {
-      "name": "person_name",
+      "name": "person_name_3",
       "label": "Person's Name",
       "type": "TextField",
       "children": [{
@@ -49,7 +49,7 @@ const flexiConfig = {
         "label": "First Person's Name",
         "type": "TextField",
         children: {
-          "name": "states",
+          "name": "states_3",
           "label": "Person's state",
           "type": "DropDown",
           "values": [
@@ -58,7 +58,7 @@ const flexiConfig = {
                     "Tamil Nadu"
           ],
           "children":{
-            "name": "states",
+            "name": "states_31",
             "label": "Person's state",
             "type": "DropDown",
             "values": [
