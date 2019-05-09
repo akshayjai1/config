@@ -13,6 +13,9 @@ class Flexi extends React.Component {
       [event.target.name]: event.target.value
     })
   }
+  handleChange1 = event => {
+    this.setState(event);
+  }
   onSubmit = () => {
     // Replace data with composing your form data
     const data = {
@@ -25,8 +28,11 @@ class Flexi extends React.Component {
     const { items = []} = this.props.config
     return (
       <form>
+        <br />
         {items.map((item, i) => <CompositeControl key={i} {...item} handleChange={this.handleChange}/>)}
-        {items.map((item, i) => <CompositeControl1 key={i} {...item} handleChange={this.handleChange}/>)}
+        <hr/>
+        <br/>
+        {items.map((item, i) => <CompositeControl1 key={i} {...item} handleChange={this.handleChange1}/>)}
         <button onClick={this.onSubmit} />
       </form>
     );
