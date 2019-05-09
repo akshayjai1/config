@@ -14,7 +14,9 @@ class Flexi extends React.Component {
   }
   onSubmit = () => {
     // Replace data with composing your form data
-    const data = {};
+    const data = {
+      ...this.state
+    };
     this.props.onSubmit(data); // dont edit this line
   };
 

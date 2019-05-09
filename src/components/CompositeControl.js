@@ -5,13 +5,20 @@ import SelectControl from './SelectControls';
 const CompositeControl = props => {
   const { name, label, type, children, values, handleChange } = props;
   let Control = null, Children = null;
+  const firstRef = React.createRef();
   const commonProps = {
     name,
     label,
-    handleChange
+    handleChange,
+    ref:firstRef
   }
+  // const handleFirstChange = event => {
+  //   handleChange({
+  //     value
+  //   })
+  // }
   if(type === 'TextField') {
-    Control = <TextControl {...commonProps} />;
+    Control = <TextControl {...commonProps}/>;
   } else if (type === 'DropDown') {
     Control = <SelectControl {...commonProps} values={values}/>;
   } 
