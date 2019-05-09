@@ -12,7 +12,7 @@ const CompositeControl = props => {
   if(type === 'TextField') {
     Control = <TextControl {...commonProps} />;
   } else if (type === 'DropDown') {
-    Control = <SelectControl {...commonProps} />;
+    Control = <SelectControl {...commonProps} values={values}/>;
   } 
   if(children !== undefined) {
     if(children.length) {
