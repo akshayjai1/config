@@ -14,25 +14,29 @@ const CompositeControl1 = props => {
     [name+"-1"]:'',
   },[])
   
-  const handleChildrenChange = event => {
+  const handleChildrenChange = childrenValue => {
     debugger;
-    const newState = update(state,{
-      children:{$push:[{
-        value:event.target.value
-      }]}
-    })
+    let newState;
+    if(!state.children){
+      newState = update(state,{
+        children:{$set:[childrenValue]}
+      })
+    } else {
+      newState = update(state,{
+        children:{$push:[childrenValue]}
+      })
+
+    }
     setState(newState);
     handleChange(newState)
   }
-  const handleChildChange = event => {
+  const handleChildChange = childValue => {
     debugger;
     const newState = update(state,{
       children: {
-        [event.target.name]:{
-          $set: event.target.value
+          $set: childValue
         }
-      }
-    });
+      });
     setState(newState);
     handleChange(newState);
   }
@@ -65,10 +69,12 @@ const CompositeControl1 = props => {
       Children = <CompositeControl1 {...children}  handleChange={handleChildChange}/>
     }
   }
-  return <React.Fragment>
+  return <div className="outer">
     {Control}
+    <div className="inner">
     {Children}
-  </React.Fragment>
+    </div>
+  </div>
 }
 
 export default CompositeControl1;

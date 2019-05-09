@@ -26,3 +26,14 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.outer{
+  background: yellow;
+  border: 1px solid red;
+  padding-top: 10px;
+  margin: 15px;
+}
+.inner{
+  background: cyan;
+  border: 1px solid orange;
+  margin: 15px;
+}

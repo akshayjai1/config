@@ -12,12 +12,63 @@ const flexiConfig = {
     },
     {
       "name": "states",
-            "label": "Person's state",
+      "label": "Person's state",
       "type": "DropDown",
-            "values": [
+      "values": [
                 "Maharashtra",
                 "Kerala",
                 "Tamil Nadu"
+      ],
+      "children":{
+        "name": "states",
+        "label": "Person's state",
+        "type": "DropDown",
+        "values": [
+                  "Maharashtra",
+                  "Kerala",
+                  "Tamil Nadu"
+        ],
+      }
+    },
+    {
+      "name": "person_name",
+      "label": "Person's Name",
+      "type": "TextField",
+      "children": [{
+        "name": "person_name_31",
+        "label": "First Person's Name",
+        "type": "TextField",
+      },
+      {
+        "name": "person_name_32",
+        "label": "First Person's Name",
+        "type": "TextField",
+      },
+      {
+        "name": "person_name_33",
+        "label": "First Person's Name",
+        "type": "TextField",
+        children: {
+          "name": "states",
+          "label": "Person's state",
+          "type": "DropDown",
+          "values": [
+                    "Maharashtra",
+                    "Kerala",
+                    "Tamil Nadu"
+          ],
+          "children":{
+            "name": "states",
+            "label": "Person's state",
+            "type": "DropDown",
+            "values": [
+                      "Maharashtra",
+                      "Kerala",
+                      "Tamil Nadu"
+            ],
+          }
+        }
+      }
       ]
     }
    ]

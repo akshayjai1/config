@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TextControl = (props,ref) => {
-  const { name, label, handleChange} = props;
+  const { name, label, handleChange, className=''} = props;
   // React.useEffect(()=> {
   //   handleChange({
   //     target: {
