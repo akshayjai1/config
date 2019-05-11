@@ -3,9 +3,8 @@ import TextControl from './TextControl';
 import SelectControl from './SelectControls';
 import update from 'immutability-helper';
 const CompositeControl1 = props => {
-  const { name, label, type, children, values, handleChange, parentName } = props;
-  let Control = null, Children = null;
-  
+  const { name, label, type, children, values, handleChange, parentName,index='' } = props;
+  let Control = null, Children = null, identifier = index;
   const firstRef = React.createRef();
 
   const [state, setState] = React.useState({
@@ -16,7 +15,6 @@ const CompositeControl1 = props => {
   },[])
   
   const handleChildrenChange = (childrenValue,parent) => {
-    // console.log('handleChildrenChange',JSON.stringify(childrenValue),childrenValue,parent,parentName)
     let intermediateState = state;
     let currentParentParameter = Object.values(childrenValue)[0].parentName
     if(!state[currentParentParameter].children){
@@ -41,7 +39,6 @@ const CompositeControl1 = props => {
     handleChange(newState,parent,parentName)
   }
   const handleChildChange = (childValue, parent) => {
-    // console.log('handleChildChange',JSON.stringify(childValue),childValue,parent,parentName)
     let currentParentParameter = Object.values(childValue)[0].parentName
     const newState = update(state,{
       [currentParentParameter]: {
@@ -56,7 +53,6 @@ const CompositeControl1 = props => {
   const handleFirstChange = event => {
     const name = event.target.name;
     const value = event.target.value;
-    // console.log('handleFirstChange',name,value)
     const newState = update(state,{
       [name]:{
         $merge:{
@@ -73,7 +69,8 @@ const CompositeControl1 = props => {
     name,
     label,
     handleChange: handleFirstChange,
-    ref:firstRef
+    ref:firstRef,
+    identifier
   }
   if(type === 'TextField') {
     Control = <TextControl {...commonProps}/>;
@@ -82,9 +79,11 @@ const CompositeControl1 = props => {
   } 
   if(children !== undefined) {
     if(Array.isArray(children)) {
-      Children = children.map((child, i) => <CompositeControl1 parentName={name} {...child} key={i} handleChange={handleChildrenChange}/>)
+      Children = children.map((child, i) => <CompositeControl1 parentName={name} {...child} key={i} handleChange={handleChildrenChange} index={`${identifier}._${i+1}`}/>)
     } else {
-      Children = <CompositeControl1 {...children} parentName={name} handleChange={handleChildChange}/>
+      Children = <CompositeControl1 {...children} parentName={name} handleChange={handleChildChange}
+        index={`${identifier}.${1}`}
+      />
     }
   }
   return <div className="outer">

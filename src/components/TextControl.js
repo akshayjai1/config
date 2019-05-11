@@ -1,17 +1,9 @@
 import React from 'react';
 
 const TextControl = (props,ref) => {
-  const { name, label, handleChange, className=''} = props;
-  // React.useEffect(()=> {
-  //   handleChange({
-  //     target: {
-  //       name,
-  //       value: ''
-  //     }
-  //   });
-  // },[])
+  const { name, label, handleChange, className='', identifier = ''} = props;
   return <div>
-    <label htmlFor={name}>{label}</label>
+    <label htmlFor={name}>{`${identifier} - ${label}`}</label>
     <input type="text" name={name} onChange={handleChange} ref={ref}/>
   </div>
 }
