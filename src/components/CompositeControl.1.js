@@ -4,13 +4,11 @@ import SelectControl from './SelectControls';
 import update from 'immutability-helper';
 const CompositeControl1 = props => {
   const { name, label, type, children, values, handleChange, parentName } = props;
-  // debugger;
   let Control = null, Children = null;
   
   const firstRef = React.createRef();
 
   const [state, setState] = React.useState({
-    // [name+"-1"]:firstRef.current.value || '',
     [name]:{
       [name]:null,
       children:null
@@ -18,10 +16,10 @@ const CompositeControl1 = props => {
   },[])
   
   const handleChildrenChange = (childrenValue,parent) => {
-    debugger;
-    console.log('handleChildrenChange',JSON.stringify(childrenValue),childrenValue,parent,parentName)
+    // console.log('handleChildrenChange',JSON.stringify(childrenValue),childrenValue,parent,parentName)
     let intermediateState = state;
-    if(!state[parent].children){
+    let currentParentParameter = Object.values(childrenValue)[0].parentName
+    if(!state[currentParentParameter].children){
       intermediateState = update(state, {
         [parent]: {
           "children": {
@@ -31,7 +29,7 @@ const CompositeControl1 = props => {
       });
     }
     const newState = update(intermediateState,{
-      [parent]: {
+      [currentParentParameter]: {
         "children": {
           $merge: {
               ...childrenValue
@@ -43,10 +41,10 @@ const CompositeControl1 = props => {
     handleChange(newState,parent,parentName)
   }
   const handleChildChange = (childValue, parent) => {
-    debugger;
-    console.log('handleChildChange',JSON.stringify(childValue),childValue,parent,parentName)
+    // console.log('handleChildChange',JSON.stringify(childValue),childValue,parent,parentName)
+    let currentParentParameter = Object.values(childValue)[0].parentName
     const newState = update(state,{
-      [parent]: {
+      [currentParentParameter]: {
           $merge: {
             "children":Object.values(childValue)[0]
           }
@@ -56,15 +54,14 @@ const CompositeControl1 = props => {
     handleChange(newState,parent,parentName);
   }
   const handleFirstChange = event => {
-    // debugger;
     const name = event.target.name;
     const value = event.target.value;
-    console.log('handleFirstChange',name,value)
+    // console.log('handleFirstChange',name,value)
     const newState = update(state,{
       [name]:{
         $merge:{
           [name]: value,
-          // parentName
+          parentName
         }
       }
     });
