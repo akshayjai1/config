@@ -1,4 +1,4 @@
-const a = {
+const response = {
   name1: {
     name1: value,
     children: {
@@ -32,5 +32,3 @@ const a = {
 insights about Data
 1. if the input is Array, the output will contain object with keys k1,k2,k3
 2. if there is an object, it will have an object with two properties namely, k1 and children
-
-That's all I see only these two condition
