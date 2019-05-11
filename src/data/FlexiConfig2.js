@@ -1,17 +1,17 @@
-const flexiConfig = {
+const flexiConfig2 = {
   items: [
     {
-      "name": "person_name",
+      "name": "1",
       "label": "Person's Name",
       "type": "TextField",
       "children": [{
-        "name": "person_name_1",
+        "name": "1.1_1",
         "label": "First Person's Name", 
         "type": "TextField",
       }]
     },
     {
-      "name": "states",
+      "name": "2",
       "label": "Person's state",
       "type": "DropDown",
       "values": [
@@ -20,7 +20,7 @@ const flexiConfig = {
                 "Tamil Nadu"
       ],
       "children":{
-        "name": "states_2",
+        "name": "2.2",
         "label": "Person's state",
         "type": "DropDown",
         "values": [
@@ -31,25 +31,25 @@ const flexiConfig = {
       }
     },
     {
-      "name": "person_name_3",
+      "name": "3",
       "label": "Person's Name",
       "type": "TextField",
       "children": [{
-        "name": "person_name_31",
+        "name": "3.1_1",
         "label": "First Person's Name",
         "type": "TextField",
       },
       {
-        "name": "person_name_32",
+        "name": "3.1_2",
         "label": "First Person's Name",
         "type": "TextField",
       },
       {
-        "name": "person_name_33",
+        "name": "3.1_3",
         "label": "First Person's Name",
         "type": "TextField",
         children: {
-          "name": "states_3",
+          "name": "3.1_3.1",
           "label": "Person's state",
           "type": "DropDown",
           "values": [
@@ -58,7 +58,7 @@ const flexiConfig = {
                     "Tamil Nadu"
           ],
           "children":{
-            "name": "states_31",
+            "name": "3.1_3.1.1",
             "label": "Person's state",
             "type": "DropDown",
             "values": [
@@ -74,4 +74,4 @@ const flexiConfig = {
    ]
 };
 
-export default flexiConfig;
+export default flexiConfig2;

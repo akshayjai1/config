@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Flexi from "./Flexi";
 import flexiConfig from './data/FlexiConfig';
+import flexiConfig2 from './data/FlexiConfig2';
 class App extends Component {
   render() {
     return (
@@ -11,7 +12,7 @@ class App extends Component {
         </header>
           <Flexi
             onSubmit={(data) => {console.log('submitted data',data)}}
-            config={flexiConfig}
+            config={flexiConfig2}
           />
       </div>
     );

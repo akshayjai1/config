@@ -3,55 +3,73 @@ import TextControl from './TextControl';
 import SelectControl from './SelectControls';
 import update from 'immutability-helper';
 const CompositeControl1 = props => {
-  const { name, label, type, children, values, handleChange } = props;
-  
+  const { name, label, type, children, values, handleChange, parentName } = props;
+  // debugger;
   let Control = null, Children = null;
   
   const firstRef = React.createRef();
 
   const [state, setState] = React.useState({
     // [name+"-1"]:firstRef.current.value || '',
-    [name+"-1"]:'',
+    [name]:{
+      [name]:null,
+      children:null
+    },
   },[])
   
-  const handleChildrenChange = childrenValue => {
+  const handleChildrenChange = (childrenValue,parent) => {
     debugger;
-    let newState;
-    if(!state.children){
-      newState = update(state,{
-        children:{$set:{
-          ...childrenValue,  
-        }}
-      })
-    } else {
-      newState = update(state,{
-        children:{$merge:{
-          ...childrenValue}}
-      })
-
-    }
-    setState(newState);
-    handleChange(newState)
-  }
-  const handleChildChange = childValue => {
-    debugger;
-    const newState = update(state,{
-      children: {
-          $set: childValue
+    console.log('handleChildrenChange',JSON.stringify(childrenValue),childrenValue,parent,parentName)
+    let intermediateState = state;
+    if(!state[parent].children){
+      intermediateState = update(state, {
+        [parent]: {
+          "children": {
+            $set: {}
+          }
         }
       });
+    }
+    const newState = update(intermediateState,{
+      [parent]: {
+        "children": {
+          $merge: {
+              ...childrenValue
+            }
+          }
+        }      
+    });
     setState(newState);
-    handleChange(newState);
+    handleChange(newState,parent,parentName)
+  }
+  const handleChildChange = (childValue, parent) => {
+    debugger;
+    console.log('handleChildChange',JSON.stringify(childValue),childValue,parent,parentName)
+    const newState = update(state,{
+      [parent]: {
+          $merge: {
+            "children":Object.values(childValue)[0]
+          }
+        }      
+    });
+    setState(newState);
+    handleChange(newState,parent,parentName);
   }
   const handleFirstChange = event => {
     // debugger;
+    const name = event.target.name;
+    const value = event.target.value;
+    console.log('handleFirstChange',name,value)
     const newState = update(state,{
-      [name+"-1"]:{
-        $set:event.target.value
+      [name]:{
+        $merge:{
+          [name]: value,
+          // parentName
+        }
       }
     });
     setState(newState);
-    handleChange(newState);
+    handleChange(newState,parentName);
 
   }
   const commonProps = {
@@ -66,10 +84,10 @@ const CompositeControl1 = props => {
     Control = <SelectControl {...commonProps} values={values}/>;
   } 
   if(children !== undefined) {
-    if(children.length) {
-      Children = children.map((child, i) => <CompositeControl1 {...child} key={i} handleChange={handleChildrenChange}/>)
+    if(Array.isArray(children)) {
+      Children = children.map((child, i) => <CompositeControl1 parentName={name} {...child} key={i} handleChange={handleChildrenChange}/>)
     } else {
-      Children = <CompositeControl1 {...children}  handleChange={handleChildChange}/>
+      Children = <CompositeControl1 {...children} parentName={name} handleChange={handleChildChange}/>
     }
   }
   return <div className="outer">
