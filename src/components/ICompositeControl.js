@@ -2,7 +2,7 @@ import React from 'react';
 import TextControl from './TextControl';
 import SelectControl from './SelectControls';
 import update from 'immutability-helper';
-const CompositeControl1 = props => {
+const ICompositeControl = props => {
   const { name, label, type, children, values, handleChange, parentName,index='' } = props;
   let Control = null, Children = null, identifier = index;
   const firstRef = React.createRef();
@@ -79,9 +79,9 @@ const CompositeControl1 = props => {
   } 
   if(children !== undefined) {
     if(Array.isArray(children)) {
-      Children = children.map((child, i) => <CompositeControl1 parentName={name} {...child} key={i} handleChange={handleChildrenChange} index={`${identifier}._${i+1}`}/>)
+      Children = children.map((child, i) => <ICompositeControl parentName={name} {...child} key={i} handleChange={handleChildrenChange} index={`${identifier}._${i+1}`}/>)
     } else {
-      Children = <CompositeControl1 {...children} parentName={name} handleChange={handleChildChange}
+      Children = <ICompositeControl {...children} parentName={name} handleChange={handleChildChange}
         index={`${identifier}.${1}`}
       />
     }
@@ -94,4 +94,4 @@ const CompositeControl1 = props => {
   </div>
 }
 
-export default CompositeControl1;
+export default ICompositeControl;

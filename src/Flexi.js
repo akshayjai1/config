@@ -1,6 +1,6 @@
 import React from 'react';
-import CompositeControl from './components/CompositeControl';
-import CompositeControl1 from './components/CompositeControl.1';
+// import CompositeControl from './components/CompositeControl';
+import ICompositeControl from './components/ICompositeControl';
 
 class Flexi extends React.Component {
   constructor(props) {
@@ -8,34 +8,29 @@ class Flexi extends React.Component {
     this.state = {};
   }
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-  handleChange1 = event => {
+
+  handleIChange = event => {
     this.setState(event);
   }
-  onSubmit = () => {
+  onSubmit = (event) => {
     // Replace data with composing your form data
     const data = {
       ...this.state
     };
+    event.preventDefault();
     console.log(data);
-    // this.props.onSubmit(data); // dont edit this line
+    this.props.onSubmit(data); // dont edit this line
   };
   renderComposite = (item, i) => {
-    return <CompositeControl1 key={i} index={`${i+1}`} {...item} handleChange={this.handleChange1}/>
+    return <ICompositeControl key={i} index={`${i+1}`} {...item} handleChange={this.handleIChange}/>
   }
   render() {
     const { items = []} = this.props.config
     return (
-      <div>
-        <hr/>
-        <br/>
+      <form>
         {items.map(this.renderComposite)}
-        <button onClick={this.onSubmit} >Submit</button>
-      </div>
+        <button onClick={this.onSubmit} className="submit">Submit</button>
+      </form>
     );
   }
 }
